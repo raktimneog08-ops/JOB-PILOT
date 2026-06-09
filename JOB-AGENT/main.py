@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from scrapers.remoteok_scraper import RemoteOKScraper
 from scrapers.naukri_scraper import NaukriScraper
-from scrapers.wellfound_scraper import WellFoundScraper
+from scrapers.adzuna_scraper import AdzunaScraper
 from scrapers.base_scraper import ScrapeResult
 
 from core.job_processor import deduplicate_jobs, compute_top_matches
@@ -63,6 +63,9 @@ def main():
     filter_keywords = config.get("keywords_filter", [])
     delay_min = config.get("polite_delay_min_seconds", 3)
     delay_max = config.get("polite_delay_max_seconds", 6)
+    adzuna_countries = config.get("adzuna_countries", ["in"])
+    adzuna_app_id = os.environ.get("ADZUNA_APP_ID", config.get("adzuna_app_id", ""))
+    adzuna_app_key = os.environ.get("ADZUNA_APP_KEY", config.get("adzuna_app_key", ""))
     
     # Get Slack webhook URL from environment
     slack_webhook_env = config.get("slack_webhook_url_env", "SLACK_WEBHOOK_URL")
@@ -81,7 +84,14 @@ def main():
     scrapers = [
         ("RemoteOK", RemoteOKScraper(delay_min=delay_min, delay_max=delay_max, use_proxy=False)),
         ("Naukri", NaukriScraper(delay_min=delay_min + 1, delay_max=delay_max + 2, use_proxy=False)),
-        ("WellFound", WellFoundScraper(delay_min=delay_min, delay_max=delay_max, use_proxy=False)),
+        ("Adzuna", AdzunaScraper(
+            delay_min=delay_min,
+            delay_max=delay_max,
+            use_proxy=False,
+            countries=adzuna_countries,
+            app_id=adzuna_app_id,
+            app_key=adzuna_app_key,
+        )),
     ]
     
     # Phase 1: Scrape all platforms

@@ -20,4 +20,8 @@ services:
         generateValue: true
       - key: NEXTAUTH_URL
         value: https://your-custom-gateway-domain.onrender.com # Change to public gateway URL
+      - key: ADZUNA_APP_ID
+        sync: false
+      - key: ADZUNA_APP_KEY
+        sync: false
 

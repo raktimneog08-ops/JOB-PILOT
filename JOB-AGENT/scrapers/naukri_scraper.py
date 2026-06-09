@@ -118,7 +118,8 @@ class NaukriScraper(BaseScraper):
     def _extract_job_from_api_item(self, item: dict) -> Optional[ScrapeResult]:
         """Extract job details from a single Naukri API job item."""
         try:
-            title = item.get("JOB_SPEC", "") or item.get("post", "")
+            # `post` is the clean human-readable title; `JOB_SPEC` is an internal code
+            title = item.get("post", "") or item.get("JOB_SPEC", "")
             if not title:
                 return None
 

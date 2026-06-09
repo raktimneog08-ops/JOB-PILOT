@@ -30,29 +30,20 @@ class RemoteOKScraper(BaseScraper):
         )
 
     def build_search_url(self, job_title: str, page: int = 1) -> str:
-        """Build RemoteOK search URL. RemoteOK uses slug-like URL paths."""
-        # Use JSON feed for reliable results
-        return f"{self.BASE_URL}/remote-jobs.json"
+        """Build RemoteOK API URL. The official endpoint is /api (not /remote-jobs.json)."""
+        # The official public API endpoint — returns full JSON feed
+        return f"{self.BASE_URL}/api"
 
     def parse_response(self, html: str, job_title: str) -> List[ScrapeResult]:
         """
-        Parse RemoteOK HTML to extract job listings.
+        Parse RemoteOK JSON API feed to extract job listings.
 
-        RemoteOK structure:
-        <tr class="job" data-url="/remote-job/...">
-            <td class="image"><img/></td>
-            <td class="company"><h3>Company</h3></td>
-            <td class="position"><h2>Job Title</h2></td>
-            <td class="tags">
-                <h3>salary</h3>
-                <h3>location</h3>
-            </td>
-            <td class="date"><time datetime="...">...</time></td>
-        </tr>
+        RemoteOK returns a JSON array where the first element is a metadata/legal
+        notice and the rest are job objects. We filter client-side by keyword.
         """
         results = []
 
-        # Try JSON feed first. Some responses include a prefix; try to locate the JSON array start.
+        # Parse JSON feed (primary path)
         try:
             data = json.loads(html)
         except Exception:
@@ -65,28 +56,47 @@ class RemoteOKScraper(BaseScraper):
                 data = None
 
         if isinstance(data, list):
-            # First element may be metadata; filter real job objects
+            # Split search query into individual keywords for fuzzy matching
+            # e.g. "react developer" → ["react", "developer"]
+            search_keywords = [kw.strip().lower() for kw in job_title.split() if kw.strip()]
+
             for item in data:
                 if not isinstance(item, dict):
                     continue
-                # skip metadata entries
+                # Skip the metadata/legal header object
                 if item.get("last_updated") and item.get("legal"):
                     continue
 
                 title = item.get("position") or item.get("title") or ""
                 company = item.get("company") or ""
-                location = item.get("location") or item.get("tags") or "Remote"
+                location = item.get("location") or "Remote"
+                tags = item.get("tags") or []
                 slug = item.get("slug") or ""
                 job_id = item.get("id") or ""
-                job_url = ""
-                if slug:
-                    job_url = f"{self.BASE_URL}/remote-jobs/{slug}"
-                elif job_id:
-                    job_url = f"{self.BASE_URL}/remote-jobs/{job_id}"
+
+                # Prefer apply_url → url → construct from slug/id
+                job_url = item.get("apply_url") or item.get("url") or ""
+                if not job_url:
+                    if slug:
+                        job_url = f"{self.BASE_URL}/remote-jobs/{slug}"
+                    elif job_id:
+                        job_url = f"{self.BASE_URL}/remote-jobs/{job_id}"
+                # Ensure absolute URL
+                if job_url and not job_url.startswith("http"):
+                    job_url = f"{self.BASE_URL}{job_url}"
 
                 description = item.get("description") or ""
-                # Basic filtering: match job_title substring in position
-                if title and job_title.lower() in title.lower():
+
+                # Keyword matching: ANY keyword from the search phrase must appear
+                # in the job title OR in the job's tags list (e.g. ["react", "node"])
+                title_lower = title.lower()
+                tags_lower = " ".join(str(t).lower() for t in tags)
+                matched = any(
+                    kw in title_lower or kw in tags_lower
+                    for kw in search_keywords
+                )
+
+                if title and matched:
                     result = ScrapeResult(
                         title=self._clean_text(title),
                         company=self._clean_text(company),

@@ -24,5 +24,8 @@
     "dedup_similarity_threshold": 85,
     "log_level": "INFO",
     "slack_webhook_url_env": "SLACK_WEBHOOK_URL",
-    "github_repo": "raktimneog08-ops/JOB-AGENT"
+    "github_repo": "raktimneog08-ops/JOB-AGENT",
+    "adzuna_countries": ["in"],
+    "adzuna_app_id": "",
+    "adzuna_app_key": ""
 }
