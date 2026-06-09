@@ -29,6 +29,7 @@ data/tmp/
 
 # Data (keep CSV structure, ignore empty dirs)
 data/*.csv
+!data/June_2026_Job_Listings.csv
 
 # Logs
 *.log
