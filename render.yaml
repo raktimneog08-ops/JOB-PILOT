@@ -12,7 +12,7 @@ services:
         value: production
       - key: JD_RESUME_URL
         value: https://github.com/raktimneog08-ops/JD-RESUME
-      - key: SHAPESHIFTER_URL
+      - key: NEXT_PUBLIC_SHAPESHIFTER_URL
         value: https://resume-shapeshifter.onrender.com
       - key: GEMINI_API_KEY
         sync: false

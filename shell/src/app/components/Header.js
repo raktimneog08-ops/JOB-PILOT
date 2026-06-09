@@ -6,7 +6,7 @@ const appsList = [
   { 
     id: 'shapeshifter', 
     title: 'Resume Shapeshifter', 
-    path: process.env.NEXT_PUBLIC_SHAPESHIFTER_URL || 'http://localhost:3002/' 
+    path: process.env.NEXT_PUBLIC_SHAPESHIFTER_URL || 'https://resume-shapeshifter.onrender.com/' 
   },
   { 
     id: 'closer', 
