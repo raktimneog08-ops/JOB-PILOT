@@ -232,7 +232,7 @@ export default function JobAgentDashboard({ onOpenInCloser }) {
               <option value="All">All Platforms</option>
               <option value="Naukri">Naukri</option>
               <option value="RemoteOK">RemoteOK</option>
-              <option value="WellFound">WellFound</option>
+              <option value="Adzuna">Adzuna</option>
             </select>
 
             <select 
