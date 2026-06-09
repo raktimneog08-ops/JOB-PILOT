@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  shell:
+    build:
+      context: ./shell
+      dockerfile: Dockerfile
+    container_name: production-shell
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - JD_RESUME_URL=https://github.com/raktimneog08-ops/JD-RESUME
+      - SHAPESHIFTER_URL=https://resume-shapeshifter.onrender.com
+      - THE_CLOSER_URL=https://the-closer-m59fkvodcfreb8yjtdqkaw.streamlit.app
+      - NEXTAUTH_SECRET=a_very_long_secure_random_hash_for_production
+      - NEXTAUTH_URL=https://unified-shell.com  # Replace with production domain
+    restart: always
+
+  gateway:
+    image: nginx:alpine
+    container_name: production-gateway
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./gateway/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot:ro
+    depends_on:
+      - shell
+    restart: always
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot-ssl
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
