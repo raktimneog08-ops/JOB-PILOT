@@ -28,4 +28,3 @@ services:
     ports:
       - port: 80
         protocol: http
-    dependsOn: shell
