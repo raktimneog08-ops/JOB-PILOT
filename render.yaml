@@ -25,4 +25,3 @@ services:
     name: gateway
     env: docker
     dockerfilePath: gateway/Dockerfile.render
-    port: 80
