@@ -1,7 +1,8 @@
 services:
-  # 1. Next.js Shell (Private Service - accessible only inside Render network)
-  - type: pserv
+  # 1. Next.js Shell (Web Service - configured on Free plan)
+  - type: web
     name: shell
+    plan: free
     env: docker
     dockerfilePath: shell/Dockerfile
     envVars:
@@ -20,8 +21,9 @@ services:
       - key: NEXTAUTH_URL
         value: https://your-custom-gateway-domain.onrender.com # Change to public gateway URL
 
-  # 2. Public Nginx Gateway Web Service (SSL managed by Render)
+  # 2. Public Nginx Gateway Web Service (SSL managed by Render - configured on Free plan)
   - type: web
     name: gateway
+    plan: free
     env: docker
     dockerfilePath: gateway/Dockerfile.render
