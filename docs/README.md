@@ -11,8 +11,4 @@ Welcome to the documentation folder for the COMBINE-PROJECT.
 - **[Deployment Plan (VPS/Docker)](file:///d:/COMBINE-PROJECT/docs/deployment_plan.md)**: Outlines pre-deployment setups, Certbot SSL, and Docker deployment steps.
 - **[Deployment Plan (Render.com)](file:///d:/COMBINE-PROJECT/docs/render_deployment.md)**: Details Render Blueprints configurations, SSL termination, and setup steps.
 
-## Useful Links
-- **GitHub Repository (JD-RESUME)**: [JD-RESUME](https://github.com/raktimneog08-ops/JD-RESUME)
-- **Resume Shapeshifter**: [resume-shapeshifter.onrender.com](https://resume-shapeshifter.onrender.com/)
-- **The Closer**: [the-closer.streamlit.app](https://the-closer-m59fkvodcfreb8yjtdqkaw.streamlit.app/)
 
