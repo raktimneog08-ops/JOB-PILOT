@@ -7,7 +7,7 @@ services:
     dockerfilePath: shell/Dockerfile
     envVars:
       - key: PORT
-        value: 3000
+        value: '3000'
       - key: NODE_ENV
         value: production
       - key: JD_RESUME_URL
@@ -21,9 +21,3 @@ services:
       - key: NEXTAUTH_URL
         value: https://your-custom-gateway-domain.onrender.com # Change to public gateway URL
 
-  # 2. Public Nginx Gateway Web Service (SSL managed by Render - configured on Free plan)
-  - type: web
-    name: gateway
-    plan: free
-    env: docker
-    dockerfilePath: gateway/Dockerfile.render
