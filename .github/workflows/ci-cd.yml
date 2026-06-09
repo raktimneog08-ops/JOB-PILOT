@@ -17,7 +17,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-node-version: 18
+        node-version: 18
         cache: 'npm'
         cache-dependency-path: './shell/package-lock.json'
 
@@ -43,10 +43,8 @@ jobs:
 
     - name: Build production Docker image
       run: |
-        cd shell
-        docker build -t unified-shell:latest .
+        docker build -t unified-shell:latest -f shell/Dockerfile .
 
     - name: Build gateway Docker image
       run: |
-        docker build -t gateway:latest -f gateway/nginx.conf . || true
-        # Nginx configuration itself is verified
+        docker build -t gateway:latest -f gateway/Dockerfile .
