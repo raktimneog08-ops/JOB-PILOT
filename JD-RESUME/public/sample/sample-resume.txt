@@ -1,0 +1,55 @@
+John Doe
+john.doe@email.com | (555) 123-4567
+linkedin.com/in/johndoe | San Francisco, CA
+
+PROFESSIONAL SUMMARY
+Full-stack software engineer with 5+ years of experience building web applications using React, Node.js, and PostgreSQL. Passionate about creating intuitive user interfaces and scalable backend services. Experience working in agile startup environments and delivering features end-to-end.
+
+SKILLS
+Languages: JavaScript, TypeScript, Python, SQL
+Frontend: React, Next.js, HTML/CSS, Tailwind CSS
+Backend: Node.js, Express, REST APIs, GraphQL
+Databases: PostgreSQL, MongoDB, Redis
+Tools: Git, Docker, AWS (EC2, S3), CI/CD
+Testing: Jest, Cypress, React Testing Library
+
+WORK EXPERIENCE
+
+Senior Software Engineer | TechCorp Inc.
+Jan 2022 - Present | San Francisco, CA
+- Led development of a customer-facing dashboard serving 50K+ daily users, reducing page load time by 40% through code splitting and lazy loading
+- Designed and implemented a GraphQL API layer that unified data from 3 microservices, reducing frontend complexity
+- Mentored 3 junior engineers through code reviews and pair programming sessions
+- Migrated legacy jQuery codebase to React, improving developer velocity by 30%
+- Implemented automated CI/CD pipeline with GitHub Actions, reducing deployment time from 2 hours to 15 minutes
+
+Software Engineer | StartupXYZ
+Mar 2020 - Dec 2021 | Remote
+- Built a real-time collaborative editing feature using WebSockets and CRDTs, supporting 100+ concurrent users
+- Developed a REST API for user management and content moderation serving 10K requests/minute
+- Created responsive UI components using React and Tailwind CSS, achieving 95+ Lighthouse accessibility score
+- Integrated Stripe payment processing handling $500K+ in monthly transactions
+- Wrote unit and integration tests achieving 85% code coverage
+
+Junior Developer | WebAgency
+Jun 2019 - Feb 2020 | Oakland, CA
+- Developed landing pages and marketing sites for 10+ client projects using React and WordPress
+- Built custom WordPress plugins for e-commerce functionality
+- Assisted in migrating client sites from PHP to Node.js backend
+
+PROJECTS
+
+TaskFlow | React, Node.js, PostgreSQL, Docker
+- Open-source project management app with Kanban boards and real-time updates
+- 500+ GitHub stars, used by multiple small teams
+- Implemented drag-and-drop, user authentication, and WebSocket-based collaboration
+
+EDUCATION
+
+Bachelor of Science in Computer Science
+University of California, Berkeley | 2015 - 2019
+GPA: 3.7/4.0
+
+CERTIFICATIONS
+- AWS Certified Developer - Associate (2023)
+- MongoDB Certified Developer (2021)

@@ -1,0 +1,45 @@
+Senior Frontend Engineer
+
+Company: TechGrowth Inc.
+Location: San Francisco, CA (Hybrid)
+Employment Type: Full-time
+
+About the Role
+We are looking for a Senior Frontend Engineer to join our growing platform team. You will be responsible for building and maintaining our customer-facing web application used by millions of users. You will work closely with product, design, and backend teams to deliver exceptional user experiences.
+
+Required Qualifications
+- 5+ years of professional software engineering experience
+- 3+ years of experience with React and TypeScript
+- Strong understanding of web performance optimization (Core Web Vitals, lazy loading, code splitting)
+- Experience with modern CSS (Tailwind CSS, CSS Modules)
+- Experience building and consuming REST and GraphQL APIs
+- Proficiency with Git and CI/CD pipelines
+- Strong testing practices (unit, integration, end-to-end)
+- Experience with Next.js or similar React framework
+
+Preferred Qualifications
+- Experience with state management (Redux, Zustand, or similar)
+- Knowledge of Node.js backend development
+- Experience with cloud platforms (AWS, GCP, or Azure)
+- Experience with design systems and component libraries
+- Open-source contributions
+
+Responsibilities
+- Architect and implement new frontend features using React and TypeScript
+- Collaborate with designers to implement pixel-perfect, accessible UIs
+- Optimize application performance and improve Core Web Vitals scores
+- Participate in code reviews and mentor junior engineers
+- Contribute to our internal component library and design system
+- Work with backend engineers to design and evolve API contracts
+- Write and maintain comprehensive tests
+
+Tools & Technologies
+React, TypeScript, Next.js, Tailwind CSS, GraphQL, Jest, Cypress, Git, GitHub Actions, AWS, Figma
+
+What We Offer
+- Competitive salary and equity package
+- Health, dental, and vision insurance
+- 401(k) matching
+- Flexible PTO
+- Home office stipend
+- Annual learning budget

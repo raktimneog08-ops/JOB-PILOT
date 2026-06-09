@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Debugging / sample artifacts
+data/*.html
+data/*.png
+scripts/
+
+# Runtime temp files
+data/tmp/
+
+# Data (keep CSV structure, ignore empty dirs)
+data/*.csv
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
