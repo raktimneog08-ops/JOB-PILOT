@@ -1,6 +1,0 @@
-FROM nginx:alpine
-
-# Copy the specialized Render Nginx configuration
-COPY gateway/nginx.render.conf /etc/nginx/nginx.conf
-
-EXPOSE 10000
