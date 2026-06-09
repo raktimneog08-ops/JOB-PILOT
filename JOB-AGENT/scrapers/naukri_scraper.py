@@ -140,12 +140,15 @@ class NaukriScraper(BaseScraper):
 
             posted_date = item.get("addDate", "") or item.get("dateAdded", "")
 
-            # Build job URL: Naukri uses jobId to construct URL
-            job_id = item.get("jobId") or item.get("REFNO")
-            if job_id:
-                job_url = f"{self.BASE_URL}/job-details/{job_id}"
-            else:
-                job_url = ""
+            # Build job URL: Naukri uses urlStr for full URL, or constructs a search-based fallback
+            job_url = item.get("urlStr") or item.get("staticUrl") or ""
+            if job_url and not job_url.startswith("http"):
+                job_url = f"{self.BASE_URL}{job_url}"
+            elif not job_url:
+                job_id = item.get("jobId") or item.get("REFNO")
+                if job_id:
+                    # Fallback URL format if urlStr is mysteriously missing
+                    job_url = f"{self.BASE_URL}/job-details/{job_id}"
 
             description = item.get("jobDesc", "") or item.get("tupleDesc", "")
 
