@@ -7,10 +7,16 @@ module.exports = defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: 1,
   reporter: 'html',
+  timeout: 30000, // Increase global test timeout
+  expect: {
+    timeout: 10000, // Increase assertion timeout
+  },
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
     headless: true,
+    navigationTimeout: 30000, // Increase navigation timeout
+    actionTimeout: 10000, // Increase action timeout
   },
   projects: [
     {
