@@ -57,12 +57,19 @@ test.describe('Combine UI Integration Shell E2E Tests', () => {
     // Click the "Job Agent" tab
     await page.click('text=Job Agent');
     
+    // Wait for dashboard to render with longer timeout
+    await page.waitForSelector('h2:has-text("Scraper Agent Dashboard")', { timeout: 15000 });
+    
     // Check that the dashboard renders
     await expect(page.locator('h2')).toContainText('Scraper Agent Dashboard');
     
+    // Wait for listings to load from CSV with explicit waits
+    await page.waitForSelector('text=Senior React Developer', { timeout: 15000 });
+    await page.waitForSelector('text=Stitch AI', { timeout: 15000 });
+    
     // Check that we see listings loaded from CSV
-    await expect(page.locator('text=Senior React Developer').first()).toBeVisible();
-    await expect(page.locator('text=Stitch AI').first()).toBeVisible();
+    await expect(page.locator('text=Senior React Developer').first()).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('text=Stitch AI').first()).toBeVisible({ timeout: 10000 });
   });
 
   test('Job Agent listings link to Closer and pre-populate fields', async ({ page }) => {
@@ -75,15 +82,21 @@ test.describe('Combine UI Integration Shell E2E Tests', () => {
 
     // Switch to Job Agent tab
     await page.click('text=Job Agent');
-    await expect(page.locator('text=Senior React Developer').first()).toBeVisible();
+    
+    // Wait for listings to be visible
+    await page.waitForSelector('text=Senior React Developer', { timeout: 15000 });
+    await expect(page.locator('text=Senior React Developer').first()).toBeVisible({ timeout: 10000 });
 
     // Click "Tailor" next to "Senior React Developer"
     await page.locator('tr:has-text("Senior React Developer") button:has-text("Tailor")').first().click();
 
+    // Wait for navigation to The Closer tab and elements to render
+    await page.waitForSelector('h3:has-text("Outreach Parameters")', { timeout: 15000 });
+    
     // Verify redirection to The Closer tab and auto-populated input value
-    await expect(page.locator('h3').first()).toContainText('Outreach Parameters');
-    await expect(page.locator('input[placeholder="e.g. Senior Frontend Developer"]')).toHaveValue('Senior React Developer');
-    await expect(page.locator('input[placeholder="e.g. Stitch AI"]')).toHaveValue('Google');
+    await expect(page.locator('h3').first()).toContainText('Outreach Parameters', { timeout: 10000 });
+    await expect(page.locator('input[placeholder="e.g. Senior Frontend Developer"]')).toHaveValue('Senior React Developer', { timeout: 10000 });
+    await expect(page.locator('input[placeholder="e.g. Stitch AI"]')).toHaveValue('Google', { timeout: 10000 });
   });
 
   test('session logout clears tokens and redirects to login', async ({ page }) => {
@@ -97,10 +110,13 @@ test.describe('Combine UI Integration Shell E2E Tests', () => {
     // Click profile avatar to show logout dropdown
     await page.click('.user-avatar');
     
+    // Wait for logout button to be visible
+    await page.waitForSelector('text=Sign Out', { timeout: 10000 });
+    
     // Click logout button
     await page.click('text=Sign Out');
     
     // Check redirection to login screen
-    await expect(page).toHaveURL(/.*\/login/);
+    await expect(page).toHaveURL(/.*\/login/, { timeout: 10000 });
   });
 });
